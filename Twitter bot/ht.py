@@ -1,6 +1,9 @@
 #Hello tweepy bot
 import tweepy
 import json
+import logging
+import os
+
 
 auth = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
 auth.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
@@ -88,6 +91,7 @@ for tweet in tweets:
 #tweepy cursors
 for tweet in tweepy.Cursor(api.home_timeline) .items(100):
     print(f"{tweet.user.name} said: {tweet.txt}")
+
 
 
 
