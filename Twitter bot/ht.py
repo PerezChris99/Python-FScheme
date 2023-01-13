@@ -1,5 +1,5 @@
 #Hello tweepy bot
-import tweepy from *
+import tweepy
 import json
 
 auth = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
@@ -78,6 +78,12 @@ api = tweepy.API(auth, wait_on_rate_limit=True,
 tweets_listener = MyStreamListener(api)
 stream = tweepy.Stream(api.auth, tweets_listener)
 stream.filter(track=["Python", "Flask", "Django"], languages=["en"])
+
+#fetching every tweet in which the account is mentioned
+tweets = api.mentions_timeline()
+for tweet in tweets:
+    tweet.favourite()
+    tweet.user.follow()
 
 
 
