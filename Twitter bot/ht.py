@@ -85,6 +85,11 @@ for tweet in tweets:
     tweet.favourite()
     tweet.user.follow()
 
+#tweepy cursors
+for tweet in tweepy.Cursor(api.home_timeline) .items(100):
+    print(f"{tweet.user.name} said: {tweet.txt}")
+
+
 
 
 
