@@ -40,5 +40,14 @@ tweet = tweets[0]
 print(f"liking tweet {tweet.id} of {tweet.author.name}")
 api.create_favourite(tweet.id)
 
+#methods for blocking users
+for block in api.blocks():
+    print(block.name)
+
+#methods for searches
+for tweet in api.search(q="Python", lang="en", rpp=10):
+    print(f"{tweet.user.name}:{tweet.text}")
+
+    
 
 
