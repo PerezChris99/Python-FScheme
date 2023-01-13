@@ -31,4 +31,14 @@ for follower in user.followers():
 #methods for followers
 api.create_friendship("realpython")
 
+#methods for your account
+api.update_profile(description="I Like Python")
+
+#methods for likes
+tweets = api.home_timeline(count=1)
+tweet = tweets[0]
+print(f"liking tweet {tweet.id} of {tweet.author.name}")
+api.create_favourite(tweet.id)
+
+
 
