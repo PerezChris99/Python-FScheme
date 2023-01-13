@@ -16,5 +16,19 @@ for tweet in timeline:
 #method for tweets
 api.update_status("Test tweet from tweepy python")
 
+#methods for users
+user = api.get_user("MikezGarcia")
+
+print("User details:")
+print(user.name)
+print(user.description)
+print(user.location)
+
+print("Last 50 Followers:")
+for follower in user.followers():
+    print(follower.name)
+
+#methods for followers
+api.create_friendship("realpython")
 
 
