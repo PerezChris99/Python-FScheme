@@ -1,5 +1,6 @@
 #Hello tweepy bot
-import tweepy
+import tweepy from *
+import json
 
 auth = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
 auth.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
@@ -48,6 +49,36 @@ for block in api.blocks():
 for tweet in api.search(q="Python", lang="en", rpp=10):
     print(f"{tweet.user.name}:{tweet.text}")
 
-    
+#methods for trends
+trends_result = api.trends_place(1)
+for trend in trends_result[0]["trends"]:
+    print(trend["name"])
+
+#methods for streaming
+
+class MyStreamListener(tweepy.StreamListener):
+    def __init__(self, api):
+        self.api = api
+        self.me = api.me()
+
+    def on_status(self, tweet):
+        print(f"{tweet.user.name}:{tweet.text}")
+
+    def on_error(self, status):
+        print("Error detected")
+
+#authenticate to twitter
+auth = tweepy.OAuthHandler("CONSUMER_KEY", "COMSUMER_SECRET")
+auth.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
+
+#create API object
+api = tweepy.API(auth, wait_on_rate_limit=True,
+    wait_on_rate_limit_notify=True)
+
+tweets_listener = MyStreamListener(api)
+stream = tweepy.Stream(api.auth, tweets_listener)
+stream.filter(track=["Python", "Flask", "Django"], languages=["en"])
+
+
 
 
