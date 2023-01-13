@@ -29,6 +29,8 @@ while player == False:
     else:
         print("Thats not an acceptable play. check your spelling!")
 
+    player = False
+    computer = t[randint(0,2)]
     
 
 
